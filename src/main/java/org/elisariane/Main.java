@@ -1,8 +1,8 @@
 package org.elisariane;
 
 import org.elisariane.models.User;
-import org.elisariane.processor.FileProcessor;
-import org.elisariane.utils.JsonConverter;
+import org.elisariane.processor.OrderFileProcessor;
+import org.elisariane.utils.converter.JsonConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,11 +21,10 @@ public class Main {
         }
         String path = args[0];
         try {
-            List<User> users = FileProcessor.processFileOrDirectory(path);
+            List<User> users = OrderFileProcessor.processFileOrDirectory(path);
 
-            BufferedWriter writer = new BufferedWriter(new FileWriter("output-file.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("./output-files/output-file.txt"));
             writer.write(JsonConverter.toJson(users));
-            writer.close();
 
         } catch (IOException e) {
             LOGGER.error("Erro ao processar o arquivo ou diretório: {}", e.getMessage(), e);

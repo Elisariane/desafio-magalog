@@ -1,4 +1,4 @@
-package org.elisariane.processor;
+package org.elisariane.aggregator;
 
 import org.elisariane.dtos.OrderLine;
 import org.elisariane.models.Order;
@@ -7,7 +7,7 @@ import org.elisariane.models.User;
 
 import java.util.*;
 
-public class DataAggregator {
+public class OrderAggregator {
     private final Map<Integer, User> userMap = new LinkedHashMap<>();
 
     public User aggregate(OrderLine orderLine) {
@@ -19,4 +19,9 @@ public class DataAggregator {
         order.addProduct(new Product(orderLine.productId(), orderLine.productValue()));
         return user;
     }
+
+    public List<User> getAggregatedUsers() {
+        return new ArrayList<>(userMap.values());
+    }
+
 }
